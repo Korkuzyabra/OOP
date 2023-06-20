@@ -119,10 +119,10 @@ int main()
 	lion.rarity = "Not rerity";
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "         They are rerity?            " << std::endl;
-	/*if (cat == dog)
+	if (cat == dog)
 		std::cout << cat.name + " and " + dog.name + " both are rerity " << std::endl;
 	if (rabbit == lion)
-		std::cout << rabbit.name + " and " + lion.name + " both aren't rerity " << std::endl;*/
+		std::cout << rabbit.name + " and " + lion.name + " both aren't rerity " << std::endl;
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "          Animal move out                    " << std::endl;
 	dog = "Tratalin";
@@ -166,8 +166,8 @@ int main()
 	invite.push_back("Ask to move to the island");
 	invite.push_back("Find a free home");
 	std::cout<<"   Instructions: 'How to move a character to an island':  " << std::endl;
-	/*for (auto i : invite)
-		std::cout << i << std::endl;*/
+	for (auto i : invite)
+		std::cout << i << std::endl;
 
 	return 0;
 }

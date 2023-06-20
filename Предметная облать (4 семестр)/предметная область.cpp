@@ -3,7 +3,6 @@
 #include <ctime>
 #include "ACNH.h"
 #include "FORWARD_LIST.h"
-#pragma warning(disable : 4996)
 
 int main()
 {

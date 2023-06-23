@@ -1,12 +1,16 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <ctime>
 #include "ACNH.h"
 #include "FORWARD_LIST.h"
+#include <vector>
+#include <ranges>
+#include <algorithm>
 
 int main()
 {
 	srand(time(0));
+
 	person human;
 	human.name = "Korkuzyabra";
 	std::cout << "name         " << human.name << std::endl;
@@ -25,6 +29,7 @@ int main()
 	std::cout << "skill        " << human.GetSkills() <<std::endl;
 	human.island = "Kinana";
 	std::cout << "island       " << human.island << std::endl;
+
 	std::cout << "---------------------------------------------" << std::endl;
 	animals cat;
 	cat.name = "Ankha";
@@ -43,6 +48,7 @@ int main()
 	std::cout << "home         " << cat.home << std::endl;
 	cat.island = "Kinana";
 	std::cout << "island       " << cat.island << std::endl;
+
 	std::cout << "---------------------------------------------" << std::endl;
 	animals rabbit;
 	rabbit.name = "Coco";
@@ -61,6 +67,7 @@ int main()
 	std::cout << "home         " << rabbit.home << std::endl;
 	rabbit.island = "Kinana";
 	std::cout << "island       " << rabbit.island << std::endl;
+
 	std::cout << "---------------------------------------------" << std::endl;
 	animals lion;
 	lion.name = "Mott";
@@ -79,6 +86,7 @@ int main()
 	std::cout << "home         " << lion.home << std::endl;
 	lion.island = "Kinana";
 	std::cout << "island       " << lion.island << std::endl;
+
 	std::cout << "---------------------------------------------" << std::endl;
 	animals dog;
 	dog.name = "Lucky";
@@ -97,6 +105,7 @@ int main()
 	std::cout << "home         " << dog.home << std::endl;
 	dog.island = "Kinana";
 	std::cout << "island       " << dog.island << std::endl;
+
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "         Top animals characters:            " << std::endl;
 	if (cat < dog)
@@ -116,16 +125,19 @@ int main()
 	}
 	std::cout << "4. " + lion.name << std::endl;
 	lion.rarity = "Not rerity";
+
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "         They are rerity?            " << std::endl;
 	if (cat == dog)
 		std::cout << cat.name + " and " + dog.name + " both are rerity " << std::endl;
 	if (rabbit == lion)
 		std::cout << rabbit.name + " and " + lion.name + " both aren't rerity " << std::endl;
+
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "          Animal move out                    " << std::endl;
 	dog = "Tratalin";
 	std::cout << dog.name + " move out on " + dog.island << std::endl;
+
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "          They are frends?                 " << std::endl;
 	std::cout << human.name + " and " + cat.name + frendship_with_person(human, cat) << std::endl;
@@ -137,7 +149,6 @@ int main()
 	Craft craft;
 	PersonFurnitureFactory ra_factory;
 	AnimalFurnitureFactory ca_factory;
-
 	Furniture* ra = craft.createFurniture(ra_factory);
 	Furniture* ca = craft.createFurniture(ca_factory);
 	std::cout << human.name + " makes:" << std::endl;
@@ -149,7 +160,6 @@ int main()
 	Director dir;
 	KinanaBuilder rk_builder;
 	AnotherBuilder ck_builder;
-
 	Island* rk = dir.createIsland(rk_builder);
 	Island* ck = dir.createIsland(ck_builder);
 	std::cout << "On the island of " + human.island << std::endl;
@@ -168,5 +178,49 @@ int main()
 	for (auto i : invite)
 		std::cout << i << std::endl;
 
+	std::cout << "---------------------------------------------" << std::endl;
+	std::cout << human.name + "'s Inventory            " << std::endl;
+	std::ranges::sort(inventory);
+	for (auto i : inventory)
+	{
+		std::cout << i << std::endl;
+	}
+
+	std::cout << "---------------------------------------------" << std::endl;
+	std::cout << "         What class is the character?          " << std::endl;
+	std::cout << typeid(Type1).name() << '\n';
+	std::cout << typeid(Type2).name() << '\n';
+
+	std::cout << "---------------------------------------------" << std::endl;
+	std::cout << "        Your luck today:          " << std::endl;
+	auto luck_sum{ [](int a, int b) {return a + b; } };
+	int k1{ luck_sum(24,78) };
+	int k2{ luck_sum(36,-75) };
+	std::cout << luck(k1, k2) << std::endl;
+
+	std::cout << "---------------------------------------------" << std::endl;
+	std::cout << "        Choose item:          " << std::endl;
+	auto choose = inventory | std::views::filter([](std::string item) {return item == "ax"; });
+	for (auto i : choose)
+	{
+		std::cout << i << std::endl;
+	}
+
+	std::cout << "---------------------------------------------" << std::endl;
+	std::cout << "       Compare the number of fruit trees on the islands:         " << std::endl;
+	auto count_fruits = treeKinana <=> treeAnother;
+	if (count_fruits < 0)
+		std::cout << "More fruit on " + human.island + " island" << std::endl;
+	else if (count_fruits==0)
+		std::cout << "The islands have the same amount of fruit" << std::endl;
+	else if (count_fruits>0)
+		std::cout << "More fruit on " + dog.island + " island" << std::endl;
+
+	std::cout << "---------------------------------------------" << std::endl;
+	std::cout << "       Compare the number of fruit trees on the islands:         " << std::endl;
+	constexpr int p1 = pop(5, 15);
+	int p2 = pop(218, 9);
+	int res = (p1 + p2) / 2;
+	std::cout << "Kinana popularity: " << res << std::endl;
 	return 0;
 }

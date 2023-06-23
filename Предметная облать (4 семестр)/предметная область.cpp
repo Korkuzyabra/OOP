@@ -188,8 +188,8 @@ int main()
 
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "         What class is the character?          " << std::endl;
-	std::cout << typeid(Type1).name() << '\n';
-	std::cout << typeid(Type2).name() << '\n';
+	std::cout << human.name + " is " + typeid(Type1).name() << '\n';
+	std::cout << cat.name + " is " + typeid(Type2).name() << '\n';
 
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "        Your luck today:          " << std::endl;

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include "FORWARD_LIST.h"
 
 class character
 {
@@ -21,10 +20,10 @@ public:
 	std::string hair;
 	std::string eyes;
 	std::string skin;
-	int GetSkills()
-	{
-		return skills = rand() % 101;
-	}
+    int GetSkills()
+    {
+        return skills = rand() % 101;
+    }
 private:
 	int skills;
 	int frendlevel = 76;
@@ -273,11 +272,11 @@ public:
 class Island
 {
 public:
-    std::vector<Flowers> vi;
-    std::vector<Path>      va;
-    std::vector<Bridge>    vh;
+    std::vector<Flowers>  vi;
+    std::vector<Path>     va;
+    std::vector<Bridge>   vh;
     std::vector<Stone>    vc;
-    std::vector<Tree>    ve;
+    std::vector<Tree>     ve;
     void info() {
         int i;
         for (i = 0; i < vi.size(); ++i)  vi[i].info();
@@ -339,4 +338,21 @@ public:
     }
 };
 
+std::vector inventory{"ax", "net", "fishing rod", "rose", "shovel"};
+std::vector treeKinana{"peach", "orange", "coconut"};
+std::vector treeAnother{"apple", "pear", "cherry", "coconut"};
 
+const bool is_human = true;
+const bool is_not_human = false;
+using Type1 = std::conditional<is_human, person, animals>::type;
+using Type2 = std::conditional<is_not_human, person, animals>::type;
+
+template <typename T>
+concept luck_t = std::same_as<T, int> || std::same_as<T, double>;
+template <luck_t T>
+T luck(T a, T b) { return a + b; }
+
+constexpr int pop(int a, int b)
+{
+    return a + b;
+}

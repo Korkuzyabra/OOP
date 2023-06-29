@@ -137,8 +137,48 @@ namespace Container
         iterator end() noexcept{return iterator(_tail);}
 
         const_iterator end() const noexcept{return iterator(_tail);}
+        
+       std::size_t max_size() const
+        {
+           return std::numeric_limits<value_type>::max();
+        }
 
+       std::size_t size() const
+       {
+           return (end() - begin());
+       }
 
+       void swap(forward_list& other)
+       {
+           reference temp;
+           temp->_head = this->_head;
+           temp->_tail = this->_tail;
+           this->_tail = other->_tail;
+           this->_head = other->_head;
+           other->_head = temp->_head;
+           other->_tail = temp->_tail;
+       }
+
+       friend void swap(forward_list& other, forward_list& another)
+       {
+           reference temp;
+           temp->_head = another->_head;
+           temp->_tail = another->_tail;
+           another->_tail = other->_tail;
+           another->_head = other->_head;
+           other->_head = temp->_head;
+           other->_tail = temp->_tail;
+       }
+
+       bool operator==(forward_list& other)
+       {
+           return std::equal(this->begin(), this->end(), other->begin(), other->end());
+       }
+
+       bool operator!=(forward_list& other)
+       {
+           return !(this == other);
+       }
 
     private:
         _node_pointer _head;

@@ -53,6 +53,12 @@ namespace Container
         {
             return _pointee != other._pointee;
         }
+
+        iterator* operator -> ()
+        {
+            return this;
+        }
+
     private:
         _node_pointer _pointee;
         explicit forward_list_iterator(_node_pointer pointee):_pointee(pointee){};
